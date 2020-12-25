@@ -15,10 +15,14 @@ module.exports = class BasePlugin {
                 if (err) return this.api.getLogger().error(err)
             });
         });
-        require("../functions/config/attach").initialize().then(res => {
-            this.config = res;
-            this.chatFormat = this.config.chatFormat;
-        });
+        setTimeout(() => {
+            require("../functions/config/attach").initialize().then(res => {
+                this.config = res;
+                this.chatFormat = this.config.chatFormat;
+            }).catch(err => {
+                console.log(err)
+            });
+        }, 500)
     }
 
     getDB() {

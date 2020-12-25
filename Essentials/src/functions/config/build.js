@@ -4,7 +4,7 @@ const yaml = require('js-yaml');
 exports.initialize = async function() {
     return new Promise((resolve) => {
 
-        fs.readFile(path.join(__dirname, '../../../../../', 'config.yaml'), 'utf8', (err, data) => {
+        fs.readFile('config.yaml', 'utf8', (err, data) => {
             if (err) throw err
             if (!data.includes("essentials:")) {
                 fs.readFile(path.join(__dirname, './', 'template.yaml'), 'utf8', (err, configData) => {
