@@ -1,0 +1,9 @@
+
+
+essentials:
+  enabled: true
+  chatFormat:
+    prefix: "<"
+    suffix: ">"
+    commands: 
+      setname: enabled

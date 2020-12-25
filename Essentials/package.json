@@ -1,0 +1,17 @@
+{
+  "name": "jsp-essentials",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "prismarine": {
+    "apiVersion": "1.0",
+    "displayName": "§9Essentials§r"
+  },
+  "author": "PMK744#5874 & Nobu#1122",
+  "license": "MIT",
+  "dependencies": {
+    "fs": "0.0.1-security",
+    "js-yaml": "^3.14.1",
+    "sqlite3": "^5.0.0"
+  }
+}

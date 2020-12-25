@@ -1,0 +1,8 @@
+Road Map for JSP Essentials
+
+Core Features:
+Dynamic Motd w/ config & intervals
+Player prefix and suffix
+/tpa <target> accept|decline
+Economy API
+/transferserver (maybe)
