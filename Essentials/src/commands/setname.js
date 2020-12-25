@@ -14,11 +14,11 @@ module.exports = class setname extends Plugin {
                     execute: async (sender, args) => {
                         
                         if (!sender.isPlayer()) {
-                            if (this.config.chatFormat.commands.setname != "enabled") return this.api.getLogger().info("§cCannot find the desired command!");
+                            if (this.chatFormat.commands.setname != "enabled") return this.api.getLogger().info("§cCannot find the desired command!");
                             return;
                         }
 
-                        if (this.config.chatFormat.commands.setname != "enabled") return sender.sendMessage("§cCannot find the desired command!");
+                        if (this.chatFormat.commands.setname != "enabled") return sender.sendMessage("§cCannot find the desired command!");
 
                         if (!args[0]) return sender.sendMessage("§cInvaild Syntax!§r\nExample: /setname [target: player] <prefix|suffix> Member\nNote: it the target name has a space, replace the space with -");
 

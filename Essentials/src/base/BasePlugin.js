@@ -38,7 +38,7 @@ module.exports = class BasePlugin {
     }
 
     setPrefix(target, content) {
-        return setPrefix(target, content, this.config.chatFormat);
+        return setPrefix(target, content, this.chatFormat);
     }
 
     getSuffix(target) {
@@ -46,7 +46,7 @@ module.exports = class BasePlugin {
     }
 
     setSuffix(target, content) {
-        return setSuffix(target, content, this.config.chatFormat);
+        return setSuffix(target, content, this.chatFormat);
     }
 
     getPlugin() {
