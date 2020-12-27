@@ -7,3 +7,10 @@ essentials:
     suffix: ">"
     commands: 
       setname: enabled
+  dynamicMotd:
+    interval: 10
+    list:
+      - §aAnother JSPrismarine server!
+      - §bAnother JSPrismarine server!
+      - §cAnother JSPrismarine server!
+      - §gAnother JSPrismarine server!
