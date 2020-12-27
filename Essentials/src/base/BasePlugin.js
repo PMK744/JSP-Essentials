@@ -56,7 +56,7 @@ module.exports = class BasePlugin {
     }
 
     setMotd(content) {
-        return setMotd(content, this.server);
+        return setMotd(content, this.raknet);
     }
 
     getPlugin() {
