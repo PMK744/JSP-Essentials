@@ -8,7 +8,7 @@ class JoinMessage {
         this.commands = {};
         this.loadEvents(__dirname + '/src/events/');
         this.loadCommands(__dirname + '/src/commands/');
-        require("./src/functions/config/build").initialize().then(res => {
+        require("./src/utils/config/build").initialize().then(res => {
             this.api.getLogger().info(res)
         });
     }
