@@ -6,10 +6,7 @@ module.exports = class method extends Plugin {
 
         let checkConfig = setInterval(() => {
             if (this.config == undefined) {} else {
-
                 if (this.config.jspMethods.commands.method != "enabled") return;
-
-                this.api.getLogger().info(`§aSuccessfully loaded /method!§r`);
                 clearInterval(checkConfig);
                 this.getApi().getServer().getCommandManager().registerClassCommand(
                     {

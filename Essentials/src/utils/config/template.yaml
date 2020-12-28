@@ -1,7 +1,6 @@
 
 
 essentials:
-  enabled: true
   chatFormat:
     prefix: "<"
     suffix: ">"
