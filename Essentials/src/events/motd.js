@@ -5,11 +5,12 @@ module.exports = class dynamicMotd extends Plugin {
         super(pluginData);
         let checkConfig = setInterval(() => {
             if (this.dynamicMotd == undefined || this.raknet == undefined) {} else {
+                if (this.dynamicMotd.enabled != true) return;
                 let motdCount = this.dynamicMotd.list.length;
                 let motdInv = this.dynamicMotd.interval;
                 let motds = this.dynamicMotd.list;
                 let currentMotd = 0;
-                this.api.getLogger().info(`§aSuccessfully loaded §9${motdCount}§a dynamicMotd messages, and each message will change every §9${motdInv}§a seconds!§r`);
+                this.api.getLogger().info(`[§5dynamicMotd§r] §aSuccessfully loaded §9${motdCount}§a dynamicMotd messages, and each message will change every §9${motdInv}§a seconds!§r`);
                 clearInterval(checkConfig);
                 this.setMotd(motds[currentMotd]);
                 let startMotd = setInterval(() => {

@@ -2,17 +2,19 @@
 
 essentials:
   chatFormat:
+    enabled: true
     prefix: "<"
     suffix: ">"
     commands: 
       setname: enabled
   dynamicMotd:
+    enabled: true
     interval: 10
     list:
-      - §aAnother JSPrismarine server!
-      - §bAnother JSPrismarine server!
-      - §cAnother JSPrismarine server!
-      - §gAnother JSPrismarine server!
+      - "§aAnother JSPrismarine server!"
+      - "§bAnother JSPrismarine server!"
+      - "§cAnother JSPrismarine server!"
+      - "§gAnother JSPrismarine server!"
   jspMethods:
     commands:
       method: disabled
