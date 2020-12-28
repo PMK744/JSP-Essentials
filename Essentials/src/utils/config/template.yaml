@@ -14,3 +14,6 @@ essentials:
       - §bAnother JSPrismarine server!
       - §cAnother JSPrismarine server!
       - §gAnother JSPrismarine server!
+  jspMethods:
+    commands:
+      method: disabled
