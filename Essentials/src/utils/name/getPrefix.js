@@ -1,5 +1,4 @@
 const sqlite3 = require('sqlite3').verbose();
-const { resolve } = require('path');
 const path = require('path');
 
 module.exports = async function getPrefix(target) {

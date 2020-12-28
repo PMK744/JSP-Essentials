@@ -1,5 +1,4 @@
 const Plugin = require('../base/BasePlugin');
-
 module.exports = class about extends Plugin {
     constructor(pluginData) {
         super(pluginData);
