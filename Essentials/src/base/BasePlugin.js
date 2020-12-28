@@ -14,14 +14,14 @@ module.exports = class BasePlugin {
             this.server = this.api.getServer()
             this.raknet = this.api.getServer().getRaknet()
         },1000)
-        require("../functions/database/attach").initialize().then(res => {
+        require("../utils/database/attach").initialize().then(res => {
             this.db = res;
             this.db.run(`CREATE TABLE IF NOT EXISTS users(name TEXT, xuid INT, prefix TEXT, suffix TEXT)`, (err) => {
                 if (err) return this.api.getLogger().error(err)
             });
         });
         setTimeout(() => {
-            require("../functions/config/attach").initialize().then(res => {
+            require("../utils/config/attach").initialize().then(res => {
                 this.config = res;
                 this.chatFormat = this.config.chatFormat;
                 this.dynamicMotd = this.config.dynamicMotd
