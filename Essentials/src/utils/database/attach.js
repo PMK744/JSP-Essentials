@@ -1,10 +1,14 @@
 const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
+const { existsSync } = require("fs");
 
-exports.initialize = async function() {
-    return new Promise((resolve) => {
-        resolve(new sqlite3.Database(path.resolve(__dirname, `../../../essentials.db`), sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE, (err) => {
-            if (err) console.log(err.message);
-        }));
+module.exports = async function attachDB(logger) {
+    const moduleName = "[§5Database§r]"
+    return new Promise((res) => {
+        if (existsSync(path.resolve(__dirname, '../../../essentials.db'))) {
+            res(new sqlite3.Database(path.resolve(__dirname, `../../../essentials.db`), err => {
+                if (err) return logger.error(moduleName + err.message);
+            }));
+        }
     })
-};
+}

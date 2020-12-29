@@ -10,8 +10,6 @@ module.exports = class about extends Plugin {
                     flags: 0,
                     aliases: [],
                     execute: (sender, args) => {
-
-
                         console.log(this.raknet);
                     },
                 },

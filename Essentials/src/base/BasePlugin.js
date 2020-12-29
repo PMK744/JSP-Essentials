@@ -5,38 +5,54 @@ const getSuffix = require('../utils/name/getSuffix');
 const setSuffix = require('../utils/name/setSuffix');
 const setMotd = require('../utils/motd/setMotd');
 
+const buildDB = require('../utils/database/build')
+const attachDB = require ('../utils/database/attach');
+
+const buildConfig = require('../utils/config/build');
+const attachConfig = require ('../utils/config/attach');
+
 module.exports = class BasePlugin {
     constructor(plugin, emitter) {
         this.plugin = plugin;
         this.api = plugin.api;
         this.emitter = emitter;
         setTimeout(() => {
-            this.server = this.api.getServer()
-            this.raknet = this.api.getServer().getRaknet()
-        },1000)
-        require("../utils/database/attach").initialize().then(res => {
-            this.db = res;
-            this.db.run(`CREATE TABLE IF NOT EXISTS users(name TEXT, xuid INT, prefix TEXT, suffix TEXT)`, (err) => {
-                if (err) return this.api.getLogger().error(err)
-            });
-        });
-        setTimeout(() => {
-            require("../utils/config/attach").initialize().then(res => {
+            this.server = this.api.getServer();
+            this.raknet = this.api.getServer().getRaknet();
+            this.logger = this.api.getLogger();
+            this.attachConfig().then(res => {
                 this.config = res;
                 this.chatFormat = this.config.chatFormat;
                 this.dynamicMotd = this.config.dynamicMotd
-            }).catch(err => {
-                console.log(err)
-            });
-        }, 500)
+            })
+            this.attachDB().then(res => {
+                this.db = res;
+            })
+        },1000)
+    }
+
+    buildDB() {
+        return buildDB(this.logger);
+    }
+
+    attachDB() {
+        return attachDB(this.logger);
     }
 
     getDB() {
         return this.db;
     }
 
+    buildConfig() {
+        return buildConfig(this.logger);
+    }
+
+    attachConfig() {
+        return attachConfig(this.logger);
+    }
+
     checkUser(target) {
-        return checkUser(target)
+        return checkUser(target);
     }
 
     getPrefix(target) {
