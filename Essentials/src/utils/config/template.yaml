@@ -15,6 +15,10 @@ essentials:
       - "§bAnother JSPrismarine server!"
       - "§cAnother JSPrismarine server!"
       - "§gAnother JSPrismarine server!"
+  webChat:
+    enabled: true
+    url: "https://discord.com/api/webhooks/"
+    chatFormat: "|SENDER|: |CONTENT|"
   jspMethods:
     commands:
       method: disabled
