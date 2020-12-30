@@ -8,8 +8,8 @@ module.exports = class onChat extends Plugin {
 
         let checkConfig = setInterval(() => {
             if (this.config == undefined) {} else {
-                if (this.config.chatFormat.enabled != true) return;
                 clearInterval(checkConfig);
+                if (this.config.chatFormat.enabled != true) return;
                 this.api.getLogger().info(`[§5chatFormat§r] §aSuccessfully loaded chatFormat settings!§r`);
                 server.getEventManager().on('playerSpawn', async event => {
                     let target = event.player;

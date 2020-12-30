@@ -15,18 +15,20 @@ module.exports = class BasePlugin {
         this.plugin = plugin;
         this.api = plugin.api;
         this.emitter = emitter;
-        setTimeout(() => {
-            this.server = this.api.getServer();
-            this.raknet = this.api.getServer().getRaknet();
-            this.logger = this.api.getLogger();
-            this.attachConfig().then(res => {
-                this.config = res;
-                this.chatFormat = this.config.chatFormat;
-                this.dynamicMotd = this.config.dynamicMotd;
-            })
-            this.attachDB().then(res => {
+        setTimeout(async () => {
+            this.server = await this.api.getServer();
+            this.raknet = await this.api.getServer().getRaknet();
+            this.logger = await this.api.getLogger();
+            await this.attachDB().then(res => {
                 this.db = res;
             })
+            setTimeout(() => {
+                this.attachConfig().then(async res => {
+                    this.config = res;
+                    this.chatFormat = this.config.chatFormat;
+                    this.dynamicMotd = this.config.dynamicMotd;
+                })
+            },500)
         },1000)
     }
 
@@ -75,7 +77,7 @@ module.exports = class BasePlugin {
     }
 
     emitMessage(sender, content) {
-        return emitMessage(sender, content, this.config.webChat)
+        return emitMessage(sender, content, this.config.webChat, this.logger)
     }
 
     getPlugin() {

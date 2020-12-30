@@ -5,8 +5,8 @@ module.exports = class setname extends Plugin {
         super(pluginData);
         let checkConfig = setInterval(() => {
             if (this.config == undefined) {} else {
-                if (this.chatFormat.commands.setname != "enabled") return;
                 clearInterval(checkConfig);
+                if (this.chatFormat.commands.setname != "enabled") return;
                 this.getApi().getServer().getCommandManager().registerClassCommand(
                     {
                         id: 'pmk:setname',
