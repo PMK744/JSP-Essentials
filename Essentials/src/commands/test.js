@@ -10,8 +10,8 @@ module.exports = class about extends Plugin {
                     flags: 0,
                     aliases: [],
                     execute: async (sender, args) => {
-                        let balance = await this.getBalanceByName(sender.username.name)
-                        sender.sendMessage(`Your Balance: §l§a${balance}§r`);
+                        console.log(this.raknet.getName().getOnlinePlayerCount())
+                        this.raknet.getName().setMaxPlayerCount(this.raknet.getName().getOnlinePlayerCount() + 1)
                     },
                 },
                 this.getApi().getServer()

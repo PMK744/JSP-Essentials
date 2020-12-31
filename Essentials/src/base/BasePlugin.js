@@ -34,6 +34,7 @@ module.exports = class BasePlugin {
                     this.config = res;
                     this.chatFormat = this.config.chatFormat;
                     this.dynamicMotd = this.config.dynamicMotd;
+                    this.dynamicPlayerCount = this.config.dynamicPlayerCount;
                     this.economy = this.config.economyAPI;
                 })
             },500)

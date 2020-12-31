@@ -15,6 +15,9 @@ essentials:
       - "§bAnother JSPrismarine server!"
       - "§cAnother JSPrismarine server!"
       - "§gAnother JSPrismarine server!"
+  dynamicPlayerCount:
+    enabled: true
+    maxPlayers: 20
   economyAPI:
     enabled: true
     deafaultBalance: 0
