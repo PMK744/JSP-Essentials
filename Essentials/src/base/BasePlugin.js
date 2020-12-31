@@ -1,3 +1,4 @@
+const getRaknet = require('../utils/getRaknet');
 const checkUser = require('../utils/checkUser');
 const getPrefix = require('../utils/name/getPrefix');
 const setPrefix = require('../utils/name/setPrefix');
@@ -17,12 +18,14 @@ module.exports = class BasePlugin {
         this.emitter = emitter;
         setTimeout(async () => {
             this.server = await this.api.getServer();
-            this.raknet = await this.api.getServer().getRaknet();
             this.logger = await this.api.getLogger();
+            await this.getRaknet().then(res => {
+                this.raknet = res;
+            })
             await this.attachDB().then(res => {
                 this.db = res;
             })
-            setTimeout(() => {
+            await setTimeout(() => {
                 this.attachConfig().then(async res => {
                     this.config = res;
                     this.chatFormat = this.config.chatFormat;
@@ -42,6 +45,10 @@ module.exports = class BasePlugin {
 
     getDB() {
         return this.db;
+    }
+
+    getRaknet() {
+        return getRaknet(this.server);
     }
 
     buildConfig() {
@@ -83,7 +90,10 @@ module.exports = class BasePlugin {
     getPlugin() {
         return this.plugin;
     }
-
+    /**
+     * Get Prismarine API
+     * @returns {Prismarine_Api}
+     */
     getApi() {
         return this.api;
     }
