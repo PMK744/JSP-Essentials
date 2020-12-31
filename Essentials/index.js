@@ -1,7 +1,7 @@
 const { readdirSync, statSync } = require('fs');
 const Path = require('path');
 
-class JoinMessage {
+module.exports.default = class essentialsStart {
     constructor(api) {
         this.api = api;
         this.events = {};
@@ -64,5 +64,3 @@ class JoinMessage {
         return [...dirPath, ...dirFiles];
     }
 }
-
-module.exports.default = JoinMessage;

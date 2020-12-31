@@ -1,4 +1,4 @@
-const Plugin = require('../base/BasePlugin');
+const Plugin = require('../base/Essentials');
 module.exports = class about extends Plugin {
     constructor(pluginData) {
         super(pluginData);

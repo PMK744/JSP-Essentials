@@ -1,4 +1,4 @@
-const Plugin = require('../base/BasePlugin');
+const Plugin = require('../base/Essentials');
 
 module.exports = class fileCheck extends Plugin {
     constructor(pluginData) {

@@ -1,4 +1,4 @@
-const Plugin = require('../base/BasePlugin');
+const Plugin = require('../base/Essentials');
 
 module.exports = class dynamicPlayerCount extends Plugin {
     constructor(pluginData) {

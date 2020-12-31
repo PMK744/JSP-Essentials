@@ -15,7 +15,7 @@ const attachDB = require ('../utils/database/attach');
 const buildConfig = require('../utils/config/build');
 const attachConfig = require ('../utils/config/attach');
 
-module.exports = class BasePlugin {
+module.exports = class Essentials {
     constructor(plugin, emitter) {
         this.plugin = plugin;
         this.api = plugin.api;
@@ -107,6 +107,10 @@ module.exports = class BasePlugin {
 
     updateBalanceByXuid(method, target, amount) {
         return updateBalanceByXuid(method, target, amount);
+    }
+
+    getLogger() {
+        return this.logger;
     }
 
     getPlugin() {
