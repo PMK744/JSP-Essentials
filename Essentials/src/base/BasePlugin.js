@@ -6,6 +6,8 @@ const getSuffix = require('../utils/name/getSuffix');
 const setSuffix = require('../utils/name/setSuffix');
 const emitMessage = require('../utils/webhook/emitMessage');
 const setMotd = require('../utils/motd/setMotd');
+const getBalanceByName = require('../utils/economy/getBalanceByName');
+const getBalanceByXuid = require('../utils/economy/getBalanceByXuid');
 const buildDB = require('../utils/database/build')
 const attachDB = require ('../utils/database/attach');
 const buildConfig = require('../utils/config/build');
@@ -86,6 +88,14 @@ module.exports = class BasePlugin {
 
     emitMessage(sender, content) {
         return emitMessage(sender, content, this.config.webChat, this.logger)
+    }
+    
+    getBalanceByName(target) {
+        return getBalanceByName(target, this.logger)
+    }
+
+    getBalanceByXuid(target) {
+        return getBalanceByXuid(target, this.logger)
     }
 
     getPlugin() {

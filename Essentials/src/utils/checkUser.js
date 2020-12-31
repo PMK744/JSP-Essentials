@@ -5,7 +5,7 @@ module.exports = async function checkUser(target, economy, logger) {
     return new Promise((res, rej) => {
         let defaultBal = economy.deafaultBalance;
         if (isNaN(defaultBal)) {
-            let moduleName = "[§5economyAPI§r]"
+            const moduleName = "[§5economyAPI§r]"
             defaultBal = 0;
             logger.error(moduleName + " §cThe defaultBalance must be an integer!")
         }
