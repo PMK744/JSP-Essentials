@@ -7,6 +7,8 @@ const setSuffix = require('../utils/name/setSuffix');
 const emitMessage = require('../utils/webhook/emitMessage');
 const setMotd = require('../utils/motd/setMotd');
 const getBalanceByName = require('../utils/economy/getBalanceByName');
+const updateBalanceByName = require('../utils/economy/updateBalanceByName');
+const updateBalanceByXuid = require('../utils/economy/updateBalanceByXuid');
 const getBalanceByXuid = require('../utils/economy/getBalanceByXuid');
 const buildDB = require('../utils/database/build')
 const attachDB = require ('../utils/database/attach');
@@ -91,11 +93,19 @@ module.exports = class BasePlugin {
     }
     
     getBalanceByName(target) {
-        return getBalanceByName(target, this.logger)
+        return getBalanceByName(target, this.logger);
     }
 
     getBalanceByXuid(target) {
-        return getBalanceByXuid(target, this.logger)
+        return getBalanceByXuid(target, this.logger);
+    }
+
+    updateBalanceByName(method, target, amount) {
+        return updateBalanceByName(method, target, amount);
+    }
+
+    updateBalanceByXuid(method, target, amount) {
+        return updateBalanceByXuid(method, target, amount);
     }
 
     getPlugin() {

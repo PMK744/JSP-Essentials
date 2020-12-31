@@ -16,7 +16,7 @@ module.exports = class balance extends Plugin {
                         aliases: [],
                         execute: async (sender, args) => {
                             if (!sender.isPlayer()) return this.logger.info(moduleName + " §cThis command can't be used in console!");
-                            const balance = await this.getBalanceByXuid(sender.username.name);
+                            const balance = await this.getBalanceByName(sender.username.name);
                             sender.sendMessage(`§7Your Balance: §a$${balance}§r`);
                         },
                     },

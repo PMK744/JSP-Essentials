@@ -20,6 +20,7 @@ essentials:
     deafaultBalance: 0
     commands:
       balance: enabled
+      updateBalance: enabled
       baltop: enabled
       pay: enabled
   webChat:
