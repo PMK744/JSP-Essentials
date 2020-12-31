@@ -21,7 +21,6 @@ essentials:
     commands:
       balance: enabled
       updateBalance: enabled
-      baltop: enabled
       pay: enabled
   webChat:
     enabled: true

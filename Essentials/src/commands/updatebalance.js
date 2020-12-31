@@ -12,6 +12,7 @@ module.exports = class updatebalance extends Plugin {
                     {
                         id: 'pmk:updatebalance',
                         description: 'Updates the balance of a player',
+                        permission: 'minecraft.command.op',
                         flags: 0,
                         aliases: [],
                         execute: async (sender, args) => {
