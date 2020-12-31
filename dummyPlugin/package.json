@@ -1,0 +1,15 @@
+{
+  "name": "dummyPlugin",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "prismarine": {
+    "apiVersion": "1.0",
+    "displayName": "DummyPlugin"
+  },
+  "author": "JSPrismarine",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
