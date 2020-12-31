@@ -30,6 +30,7 @@ module.exports = class BasePlugin {
                     this.config = res;
                     this.chatFormat = this.config.chatFormat;
                     this.dynamicMotd = this.config.dynamicMotd;
+                    this.economy = this.config.economyAPI;
                 })
             },500)
         },1000)
@@ -60,7 +61,7 @@ module.exports = class BasePlugin {
     }
 
     checkUser(target) {
-        return checkUser(target);
+        return checkUser(target, this.economy, this.logger);
     }
 
     getPrefix(target) {

@@ -15,6 +15,13 @@ essentials:
       - "§bAnother JSPrismarine server!"
       - "§cAnother JSPrismarine server!"
       - "§gAnother JSPrismarine server!"
+  economyAPI:
+    enabled: true
+    deafaultBalance: 0
+    commands:
+      balance: enabled
+      baltop: enabled
+      pay: enabled
   webChat:
     enabled: true
     url: ""
