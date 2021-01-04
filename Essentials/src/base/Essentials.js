@@ -17,6 +17,7 @@ const attachConfig = require('../utils/config/attach');
 const addWarp = require('../utils/warps/addWarp');
 const removeWarp = require('../utils/warps/removeWarp');
 const getWarps = require('../utils/warps/getWarps');
+const setPOS = require('../utils/setPOS');
 
 module.exports = class Essentials {
     constructor(plugin, emitter) {
@@ -39,6 +40,7 @@ module.exports = class Essentials {
                     this.dynamicMotd = this.config.dynamicMotd;
                     this.dynamicPlayerCount = this.config.dynamicPlayerCount;
                     this.economy = this.config.economyAPI;
+                    this.tpa = this.config.tpa;
                 })
             },500)
         },1000)
@@ -122,6 +124,10 @@ module.exports = class Essentials {
 
     getWarps(name) {
         return getWarps(name, this.logger)
+    }
+
+    setPOS(target, x, y, z) {
+        return setPOS(target, x, y, z);
     }
 
     getLogger() {

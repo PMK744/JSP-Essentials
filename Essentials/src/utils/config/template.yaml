@@ -25,6 +25,9 @@ essentials:
       balance: enabled
       updateBalance: enabled
       pay: enabled
+  tpa:
+    commands:
+      warp: enabled
   webChat:
     enabled: true
     url: ""
