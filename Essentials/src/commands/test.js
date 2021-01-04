@@ -10,11 +10,17 @@ module.exports = class about extends Plugin {
                     flags: 0,
                     aliases: [],
                     execute: async (sender, args) => {
-                        console.log(this.raknet.getName().getOnlinePlayerCount())
-                        this.raknet.getName().setMaxPlayerCount(this.raknet.getName().getOnlinePlayerCount() + 1)
+                        let x = transNum(sender.x)
+                        let y = transNum(sender.y)
+                        let z = transNum(sender.z)
+                        console.log(`X: ${x} Y: ${y} Z: ${z}`)
                     },
                 },
                 this.getApi().getServer()
             );
     }
 };
+
+function transNum(n) {
+	return Math.floor(n);
+}

@@ -10,10 +10,13 @@ const getBalanceByName = require('../utils/economy/getBalanceByName');
 const updateBalanceByName = require('../utils/economy/updateBalanceByName');
 const updateBalanceByXuid = require('../utils/economy/updateBalanceByXuid');
 const getBalanceByXuid = require('../utils/economy/getBalanceByXuid');
-const buildDB = require('../utils/database/build')
-const attachDB = require ('../utils/database/attach');
+const buildDB = require('../utils/database/build');
+const attachDB = require('../utils/database/attach');
 const buildConfig = require('../utils/config/build');
-const attachConfig = require ('../utils/config/attach');
+const attachConfig = require('../utils/config/attach');
+const addWarp = require('../utils/warps/addWarp');
+const removeWarp = require('../utils/warps/removeWarp');
+const getWarps = require('../utils/warps/getWarps');
 
 module.exports = class Essentials {
     constructor(plugin, emitter) {
@@ -107,6 +110,18 @@ module.exports = class Essentials {
 
     updateBalanceByXuid(method, target, amount) {
         return updateBalanceByXuid(method, target, amount);
+    }
+
+    addWarp(name, x, y, z) {
+        return addWarp(name, x, y, z, this.logger)
+    }
+
+    removeWarp(name) {
+        return removeWarp(name, this.logger)
+    }
+
+    getWarps(name) {
+        return getWarps(name, this.logger)
     }
 
     getLogger() {
