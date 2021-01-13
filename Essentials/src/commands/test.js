@@ -10,17 +10,10 @@ module.exports = class about extends Plugin {
                     flags: 0,
                     aliases: [],
                     execute: async (sender, args) => {
-                        let x = transNum(sender.x)
-                        let y = transNum(sender.y)
-                        let z = transNum(sender.z)
-                        console.log(`X: ${x} Y: ${y} Z: ${z}`)
+                        console.log(this.getServer())
                     },
                 },
                 this.getApi().getServer()
             );
     }
 };
-
-function transNum(n) {
-	return Math.floor(n);
-}

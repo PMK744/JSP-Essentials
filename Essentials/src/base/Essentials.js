@@ -25,8 +25,8 @@ module.exports = class Essentials {
         this.api = plugin.api;
         this.emitter = emitter;
         setTimeout(async () => {
-            this.server = await this.api.getServer();
-            this.logger = await this.api.getLogger();
+            this.server = await this.getServer();
+            this.logger = await this.getLogger();
             await this.getRaknet().then(res => {
                 this.raknet = res;
             })
@@ -46,97 +46,206 @@ module.exports = class Essentials {
         },1000)
     }
 
-    buildDB() {
-        return buildDB(this.logger);
+    /**
+     * Builds db
+     */
+    async buildDB() {
+        return buildDB(await this.getLogger());
     }
 
-    attachDB() {
-        return attachDB(this.logger);
+    /**
+     * Returns db
+     */
+    async attachDB() {
+        return attachDB(await this.getLogger());
     }
 
-    getDB() {
-        return this.db;
+    /**
+     * Returns server
+     */
+    async getServer() {
+        return await this.getApi().getServer();
     }
 
-    getRaknet() {
-        return getRaknet(this.server);
+    /**
+     * Returns raknet
+     */
+    async getRaknet() {
+        return getRaknet(await this.getServer());
     }
 
-    buildConfig() {
-        return buildConfig(this.logger);
+    /**
+     * Returns config
+     */
+    async getConfig() {
+        return await this.attachConfig();
     }
 
-    attachConfig() {
-        return attachConfig(this.logger);
+    /**
+     * Builds config
+     */
+    async buildConfig() {
+        return buildConfig(await this.getLogger());
     }
 
-    checkUser(target) {
-        return checkUser(target, this.economy, this.logger);
+    /**
+     * Attaches to config
+     */
+    async attachConfig() {
+        return await attachConfig(await this.getLogger());
     }
 
+    /**
+     * 
+     * @param {String} target 
+     */
+    async checkUser(target) {
+        const config = await this.getConfig();
+        return checkUser(target, config.economyAPI, await this.getLogger());
+    }
+
+    /**
+     * 
+     * @param {String} target 
+     */
     getPrefix(target) {
         return getPrefix(target);
     }
 
-    setPrefix(target, content) {
-        return setPrefix(target, content, this.chatFormat);
+    /**
+     * 
+     * @param {String} target 
+     * @param {String} content 
+     */
+    async setPrefix(target, content) {
+        const config = await this.getConfig();
+        return setPrefix(target, content, config.chatFormat);
     }
 
+    /**
+     * 
+     * @param {String} target 
+     */
     getSuffix(target) {
         return getSuffix(target);
     }
 
-    setSuffix(target, content) {
-        return setSuffix(target, content, this.chatFormat);
+    /**
+     * 
+     * @param {String} target 
+     * @param {String} content 
+     */
+    async setSuffix(target, content) {
+        const config = await this.getConfig();
+        return setSuffix(target, content, config.chatFormat);
     }
 
-    setMotd(content) {
-        return setMotd(content, this.raknet);
+    /**
+     * 
+     * @param {String} content 
+     */
+    async setMotd(content) {
+        return await setMotd(content, await this.getRaknet());
     }
 
-    emitMessage(sender, content) {
-        return emitMessage(sender, content, this.config.webChat, this.logger)
+    /**
+     * 
+     * @param {String} sender 
+     * @param {String} content 
+     */
+    async emitMessage(sender, content) {
+        const config = await this.getConfig();
+        return emitMessage(sender, content, config.webChat, await this.getLogger())
     }
     
-    getBalanceByName(target) {
-        return getBalanceByName(target, this.logger);
+    /**
+     * 
+     * @param {String} target 
+     */
+    async getBalanceByName(target) {
+        return getBalanceByName(target, await this.getLogger());
     }
 
-    getBalanceByXuid(target) {
-        return getBalanceByXuid(target, this.logger);
+    /**
+     * 
+     * @param {String} target 
+     */
+    async getBalanceByXuid(target) {
+        return getBalanceByXuid(target, await this.getLogger());
     }
 
+    /**
+     * 
+     * @param {String} method 
+     * @param {String} target 
+     * @param {Number} amount 
+     */
     updateBalanceByName(method, target, amount) {
         return updateBalanceByName(method, target, amount);
     }
 
+    /**
+     * 
+     * @param {String} method 
+     * @param {String} target 
+     * @param {Number} amount 
+     */
     updateBalanceByXuid(method, target, amount) {
         return updateBalanceByXuid(method, target, amount);
     }
 
-    addWarp(name, x, y, z) {
-        return addWarp(name, x, y, z, this.logger)
+    /**
+     * 
+     * @param {String} name 
+     * @param {Number} x
+     * @param {Number} y 
+     * @param {Number} z 
+     */
+    async addWarp(name, x, y, z) {
+        return addWarp(name, x, y, z, await this.getLogger())
     }
 
-    removeWarp(name) {
-        return removeWarp(name, this.logger)
+    /**
+     * 
+     * @param {String} name 
+     */
+    async removeWarp(name) {
+        return removeWarp(name, await this.getLogger())
     }
 
-    getWarps(name) {
-        return getWarps(name, this.logger)
+    /**
+     * 
+     * @param {String} name 
+     */
+    async getWarps(name) {
+        return getWarps(name, await this.getLogger())
     }
 
+    /**
+     * 
+     * @param {String} target 
+     * @param {Number} x 
+     * @param {Number} y 
+     * @param {Number} z 
+     */
     setPOS(target, x, y, z) {
         return setPOS(target, x, y, z);
     }
 
-    getLogger() {
-        return this.logger;
+    /**
+     *  Returns logger
+     */
+    async getLogger() {
+        return await this.getApi().getLogger();
     }
 
+    /**
+     *  Returns pluginAPI
+     */
     getPlugin() {
         return this.plugin;
     }
+
     /**
      * Get Prismarine API
      * @returns {Prismarine_Api}
