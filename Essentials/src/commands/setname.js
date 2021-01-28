@@ -1,4 +1,5 @@
 const Plugin = require('../base/Essentials');
+const { literal, argument, string, } = require("@jsprismarine/brigadier");
 
 module.exports = class setname extends Plugin {
     constructor(pluginData) {
@@ -12,32 +13,36 @@ module.exports = class setname extends Plugin {
                         id: 'pmk:setname',
                         description: 'Allows you to change the Suffix and Prefix of a player',
                         permission: 'minecraft.command.op',
-                        flags: 0,
-                        aliases: [],
-                        execute: async (sender, args) => {
-                            if (!args[0]) return sender.sendMessage("§cInvaild Syntax!§r\nExample: /setname [target: player] <prefix|suffix> Member\nNote: it the target name has a space, replace the space with -");
-    
-                            let target = this.getApi().getServer().getPlayerByName(args[0].replace("-", " "));
-                            let sub = args[1].replace(" ", "");
-                            let content = args.join(" ").replace(`${args[0]} ${sub} `, "")
-    
-                            if (sub != "prefix" && sub != "suffix" && sub != "name") return sender.sendMessage("§cInvaild Syntax!§r\nExample: /setname [target: player] <prefix|suffix> Member\nNote: it the target name has a space, replace the space with -");
-    
-                            if (sub == "prefix") {
-                                await this.setPrefix(target, content);
-                                return sender.sendMessage(`Successfuly set ${target.username.name}\'s prefix to: \"${content}\"`);
-                            } else if (sub == "suffix") {
-                                await this.setSuffix(target, content);
-                                return sender.sendMessage(`Successfuly set ${target.username.name}\'s suffix to: \"${content}\"`);
-                            } else {
-                                return sender.sendMessage(`Currently disabled...`);
-                            }
+                        register: dispatch => {
+                            dispatch.register(
+                                literal("setname").then(
+                                    argument("player", string()).then(
+                                        argument("method", string()).then(
+                                            argument("content", string()).executes(async context => {
+                                                const sender = context.getSource();
+                                                const player = this.getApi().getServer().getPlayerManager().getPlayerByName(context.getArgument("player"));
+                                                const method = context.getArgument("method");
+                                                const content = context.getArgument("content");
+                                                switch(method.toLowerCase()) {
+                                                    case "prefix":
+                                                        await this.setPrefix(player, content);
+                                                        return sender.sendMessage(`Successfuly set ${player.username.name}\'s prefix to: \"${content}\"`);
+                                                    case "suffix":
+                                                        await this.setSuffix(player, content);
+                                                        return sender.sendMessage(`Successfuly set ${player.username.name}\'s suffix to: \"${content}\"`);
+                                                    default:
+                                                        return sender.sendMessage("§cInvaild Method! [prefix|suffix]");
+                                                }
+                                            })
+                                        )
+                                    )
+                                )
+                            )
                         },
                     },
-                    this.getApi().getServer()
+                    this.getApi().getServer(),
                 );
             }
         });
-    }
+    };
 };
-

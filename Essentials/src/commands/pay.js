@@ -1,4 +1,5 @@
 const Plugin = require('../base/Essentials');
+const { literal, integer, argument, string, } = require("@jsprismarine/brigadier");
 
 module.exports = class pay extends Plugin {
     constructor(pluginData) {
@@ -12,31 +13,36 @@ module.exports = class pay extends Plugin {
                     {
                         id: 'pmk:pay',
                         description: 'Checks your balance',
-                        flags: 0,
-                        aliases: [],
-                        execute: async (sender, args) => {
-                            if (!sender.isPlayer()) return this.logger.info(moduleName + " §cThis command can't be used in console!");
-                            if (!args[0]) return sender.sendMessage("§cInvaild Syntax!§r\nExample: /pay [target: player] [amount]");
-                            let target = this.getApi().getServer().getPlayerByName(args[0].replace("-", " "))
-                            if (target == null) return sender.sendMessage("§cNo player was found");
-                            if (target.username.name == sender.username.name) return sender.sendMessage("§cYou can't pay yourself.");
-                            let amount = parseInt(args.join(" ").replace(`${args[0]} `, ""));
-                            if (amount <= 0) return sender.sendMessage("§cThe minimum you can pay is $1!");
-                            let balance = await this.getBalanceByName(sender.username.name);
-                            if (balance >= amount) {
-                                sender.sendMessage(`§7You have successfully paid §9${target.username.name}§7 §a$${amount}§7!`);
-                                target.sendMessage(`§9${sender.username.name}§7 has paid you §a$${amount}§7!`);
-                                this.updateBalanceByName("remove", sender.username.name, amount)
-                                this.updateBalanceByName("add", target.username.name, amount)
-                            } else {
-                                return sender.sendMessage(`§cYou don't have enough money to pay §9${target.username.name}§c §a$${amount}§c.`);
-                            }
+                        register: dispatch => {
+                            dispatch.register(
+                                literal("pay").then(
+                                    argument("player", string()).then(
+                                        argument("amount", integer()).executes(async context => {
+                                            const sender = context.getSource();
+                                            const target = this.getApi().getServer().getPlayerManager().getPlayerByName(context.getArgument("player"));
+                                            const amount = context.getArgument("amount");
+                                            if (!sender.isPlayer()) return this.logger.info(moduleName + " §cThis command can't be used in console!");
+                                            if (target == null) return sender.sendMessage("§cNo player was found");
+                                            if (target.username.name == sender.username.name) return sender.sendMessage("§cYou can't pay yourself.");
+                                            if (amount <= 0) return sender.sendMessage("§cThe minimum you can pay is $1!");
+                                            const balance = await this.getBalanceByName(sender.username.name);
+                                            if (balance >= amount) {
+                                                sender.sendMessage(`§7You have successfully paid §9${target.username.name}§7 §a$${amount}§7!`);
+                                                target.sendMessage(`§9${sender.username.name}§7 has paid you §a$${amount}§7!`);
+                                                this.updateBalanceByName("remove", sender.username.name, amount)
+                                                this.updateBalanceByName("add", target.username.name, amount)
+                                            } else {
+                                                return sender.sendMessage(`§cYou don't have enough money to pay §9${target.username.name}§c §a$${amount}§c.`);
+                                            }
+                                        })
+                                    )
+                                )
+                            )
                         },
                     },
-                    this.getApi().getServer()
+                    this.getApi().getServer(),
                 );
             }
         });
-    }
+    };
 };
-

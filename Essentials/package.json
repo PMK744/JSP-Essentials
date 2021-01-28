@@ -10,11 +10,11 @@
   "author": "PMK744#5874 & Nobu#1122",
   "license": "MIT",
   "dependencies": {
+    "@jsprismarine/brigadier": "^0.1.0",
     "axios": "^0.21.1",
     "fetch": "^1.1.0",
     "fs": "0.0.1-security",
     "js-yaml": "^3.14.1",
-    "mysql": "^2.18.1",
     "sqlite3": "^5.0.0"
   }
 }
