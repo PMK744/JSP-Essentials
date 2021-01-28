@@ -23,6 +23,11 @@ module.exports = class onChat extends Plugin {
                         await this.setPrefix(target, prefix)
                         await this.setSuffix(target, suffix)
                     }
+                    if (this.tpa.warpSpawnOnJoin == "enabled") {
+                        setTimeout(() => {
+                            this.setPOS(target, this.tpa.serverSpawnLocation.x, this.tpa.serverSpawnLocation.y + 5, this.tpa.serverSpawnLocation.z);
+                        }, 1000)
+                    }
                 });
             }
         });

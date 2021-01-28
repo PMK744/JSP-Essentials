@@ -26,8 +26,14 @@ essentials:
       updateBalance: enabled
       pay: enabled
   tpa:
+    warpSpawnOnJoin: enabled
+    serverSpawnLocation:
+      x: 0
+      y: 100
+      z: 0
     commands:
       warp: enabled
+      home: enabled
   webChat:
     enabled: true
     url: ""

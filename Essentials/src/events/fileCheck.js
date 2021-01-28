@@ -6,7 +6,7 @@ module.exports = class fileCheck extends Plugin {
         setTimeout(() => {
             this.buildDB().then(res => {
                 let db = res;
-                db.run(`CREATE TABLE IF NOT EXISTS users(name TEXT, xuid INT, prefix TEXT, suffix TEXT, balance INT)`, (err) => {
+                db.run(`CREATE TABLE IF NOT EXISTS users(name TEXT, xuid INT, prefix TEXT, suffix TEXT, balance INT, homePOS TEXT)`, (err) => {
                     if (err) return this.getApi().getLogger().error(err)
                 });
                 db.run(`CREATE TABLE IF NOT EXISTS warps(name TEXT, x INT, y INT, z INT)`, (err) => {

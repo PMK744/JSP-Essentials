@@ -17,6 +17,8 @@ const attachConfig = require('../utils/config/attach');
 const addWarp = require('../utils/warps/addWarp');
 const removeWarp = require('../utils/warps/removeWarp');
 const getWarps = require('../utils/warps/getWarps');
+const getHome = require('../utils/warps/home/getHome');
+const setHome = require('../utils/warps/home/setHome');
 const setPOS = require('../utils/setPOS');
 
 module.exports = class Essentials {
@@ -101,7 +103,7 @@ module.exports = class Essentials {
      */
     async checkUser(target) {
         const config = await this.getConfig();
-        return checkUser(target, config.economyAPI, await this.getLogger());
+        return checkUser(target, config, await this.getLogger());
     }
 
     /**
@@ -219,6 +221,23 @@ module.exports = class Essentials {
      */
     async getWarps(name) {
         return getWarps(name, await this.getLogger())
+    }
+
+    /**
+     * 
+     * @param {String} target_name 
+     */
+    async getHome(target) {
+        return getHome(target, await this.getLogger())
+    }
+
+    /**
+     * 
+     * @param {String} target_name
+     * @param {Object} pos_object
+     */
+    async setHome(target, pos) {
+        return setHome(target, pos)
     }
 
     /**
