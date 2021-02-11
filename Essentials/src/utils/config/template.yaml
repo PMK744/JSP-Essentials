@@ -41,3 +41,4 @@ essentials:
   jspMethods:
     commands:
       method: disabled
+      transferServer: disabled

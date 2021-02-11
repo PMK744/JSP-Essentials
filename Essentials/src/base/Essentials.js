@@ -20,6 +20,7 @@ const getWarps = require('../utils/warps/getWarps');
 const getHome = require('../utils/warps/home/getHome');
 const setHome = require('../utils/warps/home/setHome');
 const setPOS = require('../utils/setPOS');
+const transferserver = require('../utils/transferServer');
 
 module.exports = class Essentials {
     constructor(plugin, emitter) {
@@ -249,6 +250,16 @@ module.exports = class Essentials {
      */
     setPOS(target, x, y, z) {
         return setPOS(target, x, y, z);
+    }
+
+    /**
+     * 
+     * @param {String} target 
+     * @param {String} address 
+     * @param {Number} port
+     */
+    transferserver(target, address, port) {
+        return transferserver(target, address, port);
     }
 
     /**

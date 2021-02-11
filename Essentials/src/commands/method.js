@@ -18,7 +18,7 @@ module.exports = class method extends Plugin {
                                 literal("method").then(
                                     argument("args", string()).executes(async context => {
                                         const argsPre = context.getArgument("args");
-                                        const args = argsPre.replace(/PP/g, "()")
+                                        const args = argsPre.replace(/-/g, "().")
                                         console.log(args)
                                         const sender = context.getSource();
                                         if (sender.isPlayer()) sender.sendMessage("Check server console.");
@@ -27,10 +27,10 @@ module.exports = class method extends Plugin {
                                             console.log("Base Methods: \n");
                                             console.log(getMethods(this))
                                             console.log("\n\n");
-                                            return console.log("Include methods as args...\nEXAMPLE: getApiPP.getServerPP")
+                                            return console.log("Include methods as args...\nEXAMPLE: getApi-getServer")
                                         }
                                         try {
-                                            getMethods(eval("this." + args))
+                                            getMethods(eval("this." + args + "()"))
                                                 .then(res => {
                                                     console.log(res)
                                                 })
