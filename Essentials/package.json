@@ -18,6 +18,6 @@
     "node-pre-gyp": "^0.17.0"
   },
   "devDependencies": {
-    "@jsprismarine/prismarine": "^0.1.0-rc.34"
+    "@jsprismarine/prismarine": "^0.1.0-rc.41"
   }
 }
